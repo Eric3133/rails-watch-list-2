@@ -2,6 +2,14 @@
 <strong><%= @list.name %></strong>
 <br>
 <br>
+<h2>add a new bookmark</h2>
+<%= link_to "add a new bookmark", new_list_bookmark_path(@list) %>
+<% @list.movies.each do |movie|%>
+<div><%= movie.title %></div>
+<% bookmark = Bookmark.find_by(list: @list) %>
+<div><%= bookmark.comment %></div>
+<div><%= link_to "delete the bookmark", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "are you sure?"} %></div>
+<% end %>
 <br>
 <div>
   <%= link_to "back to my list", lists_path %>
